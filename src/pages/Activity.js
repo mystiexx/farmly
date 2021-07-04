@@ -20,6 +20,7 @@ function Activity() {
 						<PostAvatarImage
 							src="https://billiardport.com/assets/pages/media/profile/profile_user.jpg"
 							alt="feed"
+							height="40px"
 						/>
 						<MessageName>
 							{' '}
@@ -49,6 +50,7 @@ function Activity() {
 						<PostAvatarImage
 							src="https://billiardport.com/assets/pages/media/profile/profile_user.jpg"
 							alt="feed"
+							height="40px"
 						/>
 						<MessageName>
 							{' '}

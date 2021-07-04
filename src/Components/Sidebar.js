@@ -40,13 +40,14 @@ function Sidebar() {
 					<LinkText>Activity</LinkText>
 				</SideBarOption>
 			</Link>
-
+			<Link to="/user/profile" onClick={()=>setActive('Profile')}>
 			<SideBarOption key='Profile' className={active === 'Profile' ? 'linkActive' : ''}>
 				<div style={{ padding: '20px' }}>
 					<MdPerson style={{ fontSize: '30px', color: '#775937' }} />
 				</div>
 				<LinkText>Profile</LinkText>
 			</SideBarOption>
+			</Link>
 
 			<SideBarOption>
 				<div style={{ padding: '20px' }}>

@@ -91,7 +91,7 @@ padding: 20px;
 `
 export const PostAvatarImage = styled.img ` 
 border-radius: 50%;
-height: 40px;
+height: ${props => props.height};
 
 `
 
