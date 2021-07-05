@@ -4,10 +4,43 @@ import { Box, Flex, Spacer, Text, IconButton } from '@chakra-ui/react';
 import { FiEdit2, FiMail } from 'react-icons/fi';
 import { IoLocationOutline } from 'react-icons/io5';
 import FeedPost from '../Components/FeedPost';
+import {
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	ModalBody,
+	ModalCloseButton,
+	useDisclosure,
+	Textarea,
+	Input
+	
+  } from "@chakra-ui/react"
 
 function Profile() {
+	const { isOpen, onOpen, onClose } = useDisclosure()
 	return (
 		<FeedBox>
+			 <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Edit Profile</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+			  <Text>Bio</Text>
+			  <Textarea placeholder='enter bio' />
+
+			  <Text>Location</Text>
+			  <Input type='text' placeholder='Enter Location'/>
+        
+          </ModalBody>
+
+          <ModalFooter>
+        
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
 			<Header />
 
 			<div style={{ padding: '20px', borderBottom: '1px solid #D6CBB7' }}>
@@ -104,6 +137,7 @@ function Profile() {
 
 						<Spacer />
 						<IconButton
+						onClick={onOpen}
 							aria-label="Edit Profile"
 							style={{ backgroundColor: 'none' }}
 							icon={<FiEdit2 style={{ color: '#775937' }} />}

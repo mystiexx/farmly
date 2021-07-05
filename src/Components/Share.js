@@ -4,6 +4,7 @@ import { TweetBox,
 	TweetBoxInputI,
 	TweetBoxButton,
 	TweetBoxImage, } from '../Components/Feed.style';
+import { BiImageAdd } from 'react-icons/bi'
 
 function Share(props) {
 	return (
@@ -18,6 +19,7 @@ function Share(props) {
 								style={{ backgroundColor: '#E9E6E1' }}
 							/>
 						</TweetBoxInput>
+						<BiImageAdd style={{ marginTop: '30px'}}/>
 						<TweetBoxButton>Post</TweetBoxButton>
 					</TweetBoxForm>
 				</TweetBox>
