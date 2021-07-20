@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const FeedBox = styled.div `
 flex: 1;
-border-right: 1px solid #D6CBB7;
+border-right: 1px solid #e6ecf0;
 min-width: fit-content;
 overflow-y: scroll;
 --ms-overflow-style:none;
@@ -16,18 +16,17 @@ height: 100vh;
 export const FeedHeader = styled.div `
 position: sticky;
 top: 0;
-background-color: white;
 z-index:100;
-border: 1px solid #D6CBB7;
+border: 1px solid  #e6ecf0;
 padding: 15px 20px;
-background-color: #E9E6E1;
+background-color: #fff;
 `
 
 export const FeedHeaderText = styled.h2 `
 font-size: 20px;
-font-weight: 400;
+font-weight: 800;
 font-family: poppins;
-color: #775937;
+color:  #261c15;
 text-transform: uppercase;
 `
 
@@ -38,9 +37,8 @@ height: 40px;
 
 export const TweetBox = styled.div `
  padding-bottom: 10px;
- border-bottom: 8px solid #D6CBB7;
+ border-bottom: 8px solid  #e6ecf0;
  padding-right: 10px;
- background-color: #E9E6E1;
 `
 
 export const TweetBoxForm = styled.form ` 
@@ -63,7 +61,7 @@ color: #775937;
 `
 export const TweetBoxButton = styled.button ` 
 border: none;
-color: #CAB49C;
+color:  #261c15;
 font-weight: 400;
 font-family: poppins;
 border-radius: 30px;
@@ -71,7 +69,7 @@ width: 80px;
 height: 40px;
 margin-top: 20px;
 margin-left: auto;
-background-color: #826347;
+background-color:  #c5d86d;
 
 &:hover{
     opacity: 0.9;
@@ -111,7 +109,7 @@ export const PostHeaderText = styled.h3 `
  font-size: 15px;
  margin-bottom: 5px;
  font-family: poppins;
- color: #775937;
+ color:  #261c15;
  font-weight: 500;
 `
 
@@ -119,7 +117,7 @@ export const PostHeaderDescription = styled.div `
 margin-bottom: 10px;
 font-size: 15px;
 font-family: poppins;
-color: #775937;
+color:  #261c15;
 `
 
 export const PostBodyImage = styled.img `

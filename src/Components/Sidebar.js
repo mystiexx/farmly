@@ -17,16 +17,16 @@ function Sidebar() {
 			<Link to="/user/feed" onClick={()=>setActive('Feed')}>
 				<SideBarOption key='Feed' className={active === 'Feed' ? 'linkActive' : ''}>
 					<div style={{ padding: '20px' }}>
-						<MdHome style={{ color: '#775937', fontSize: '30px' }} />
+						<MdHome style={{ fontSize: '30px' }} />
 					</div>
-					<LinkText>Home</LinkText>
+					<LinkText >Home</LinkText>
 				</SideBarOption>
 			</Link>
 
 			<Link to="/user/market" onClick={()=>setActive('Market')}>
 				<SideBarOption key='Market' className={active === 'Market' ? 'linkActive' : ''}>
 					<div style={{ padding: '20px' }}>
-						<AiFillShopping style={{ fontSize: '30px', color: '#775937' }} />
+						<AiFillShopping style={{ fontSize: '30px',  }} />
 					</div>
 					<LinkText>Marketplace</LinkText>{' '}
 				</SideBarOption>
@@ -35,7 +35,7 @@ function Sidebar() {
 			<Link to="/user/activity" onClick={()=>setActive('Activity')}>
 				<SideBarOption key='Activity' className={active === 'Activity' ? 'linkActive' : ''}>
 					<div style={{ padding: '20px' }}>
-						<AiFillHeart style={{ fontSize: '30px', color: '#775937' }} />
+						<AiFillHeart style={{ fontSize: '30px' }} />
 					</div>
 					<LinkText>Activity</LinkText>
 				</SideBarOption>
@@ -43,18 +43,20 @@ function Sidebar() {
 			<Link to="/user/profile" onClick={()=>setActive('Profile')}>
 			<SideBarOption key='Profile' className={active === 'Profile' ? 'linkActive' : ''}>
 				<div style={{ padding: '20px' }}>
-					<MdPerson style={{ fontSize: '30px', color: '#775937' }} />
+					<MdPerson style={{ fontSize: '30px' }} />
 				</div>
 				<LinkText>Profile</LinkText>
 			</SideBarOption>
 			</Link>
 
+<Link to='/'>
 			<SideBarOption>
 				<div style={{ padding: '20px' }}>
-					<GoSignOut style={{ fontSize: '30px', color: '#775937' }} />
+					<GoSignOut style={{ fontSize: '30px' }} />
 				</div>
 				<LinkText>Sign out</LinkText>
 			</SideBarOption>
+			</Link>
 		</LeftBar>
 	);
 }

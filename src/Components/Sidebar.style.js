@@ -15,14 +15,14 @@ export const SideBarOption = styled.div`
  cursor: pointer;
 
  &:hover {
-     background-color: #D6CBB7;
+     background-color: #e6ecf0;
      border-radius: 30px;
      transition: color 100ms ease-out;
  }
 `
 
 export const LeftBar = styled.div `
- border-right: 1px solid #D6CBB7;
+ border-right: 1px solid #e6ecf0;
  flex: 0.2;
  min-width: 250px;
  margin-top: 20px;
@@ -35,9 +35,9 @@ export const LinkText = styled.h2 `
  font-size: 20px;
  margin-right: 20px;
  font-family: poppins;
- color: #775937;
+
 
  &::active {
      color: #1DF232;
  }
-`
+ ` 

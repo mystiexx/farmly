@@ -13,7 +13,7 @@ export const MessageHeader = styled.h3`
 	font-size: 24px;
 	font-weight: 500;
 	font-family: poppins;
-	color: #775937;
+	color:  #261c15;
 `;
 export const MessageName = styled.h3`
 	font-family: Poppins;
@@ -21,7 +21,7 @@ export const MessageName = styled.h3`
 	font-style: normal;
 	font-weight: 600;
 	letter-spacing: 0em;
-	color: #775937;
+	color:  #261c15;
 	text-align: left;
 `;
 
@@ -45,10 +45,10 @@ export const Message = styled.h4`
 
 export const MessageContainer = styled.div`
 	cursor: pointer;
-	border-bottom: 1px solid #D6CBB7;
+	border-bottom: 1px solid #e6ecf0;
 
 	&:hover {
-		background-color: #D6CBB7;
+		background-color: #e6ecf0;
 		transition: color 100ms ease-out;
         border-radius: 5px;
 		border: none;

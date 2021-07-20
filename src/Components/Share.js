@@ -16,7 +16,6 @@ function Share(props) {
 								row="4"
 								cols="50"
 								placeholder={props.text}
-								style={{ backgroundColor: '#E9E6E1' }}
 							/>
 						</TweetBoxInput>
 						<BiImageAdd style={{ marginTop: '30px'}}/>

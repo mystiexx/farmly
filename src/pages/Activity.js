@@ -13,7 +13,7 @@ function Activity() {
                 <Box
 					w="100%"
 					p={3}
-					style={{ backgroundColor: '#D6CBB7', borderRadius: '5px' }}
+					style={{ backgroundColor: '#e6ecf0', borderRadius: '5px' }}
 					mt={3}
 				>
 					<Flex>
@@ -43,7 +43,7 @@ function Activity() {
                 <Box
 					w="100%"
 					p={3}
-					style={{ backgroundColor: '#D6CBB7', borderRadius: '5px' }}
+					style={{ backgroundColor: '#e6ecf0', borderRadius: '5px' }}
 					mt={3}
 				>
 					<Flex>

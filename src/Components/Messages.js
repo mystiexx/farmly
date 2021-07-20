@@ -20,7 +20,7 @@ function Messages() {
 				<MessageHeader>Messages</MessageHeader>
 				<InputGroup mt="2">
 					<InputLeftElement pointerEvents="none" children={<BsSearch />} />
-					<Input type="text" variant="filled" placeholder="Search.." style={{ backgroundColor: '#D6CBB7'}} />
+					<Input type="text" variant="filled" placeholder="Search.." />
 				</InputGroup>
 
 				<VStack>
@@ -63,7 +63,7 @@ function Messages() {
 													style={{
 														width: '20px',
 														height: '20px',
-														backgroundColor: '#826347',
+														backgroundColor: ' #f05d23',
 														borderRadius: '100%'
 													}}
 												>

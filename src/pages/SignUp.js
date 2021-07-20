@@ -1,121 +1,92 @@
-import { Box, Flex, Container, Center, Text, Input, Button } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Box, Flex, Spacer, Text, Input, Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import mage from "../images/image.jpg";
 
 function SignUp() {
-	return (
-		<Container>
-			<Flex>
-				<Box
-					p={5}
-					style={{
-						border: '2px solid #D6CBB7',
-						width: '90%',
-						height: 'auto',
-						marginTop: '7%'
-					}}
-				>
-					<Center mb={5}>
-						<Text
-							style={{
-								fontFamily: 'poppins',
-								fontWeight: '600',
-								fontSize: '25px',
-								color: '#826347'
-							}}
-						>
-							Sign Up
-						</Text>
-					</Center>
+    return (
+        <div>
+            <Flex>
+                <img src={mage} alt="right" style={{ width: "550px", height: "100vh" }} />
 
-					<Text
-						mb={2}
-						style={{
-							fontFamily: 'poppins',
-							fontSize: '15px',
-							color: '#826347',
-							fontWeight: '400'
-						}}
-					>
-						Email
-					</Text>
-					<Input
-						mb={5}
-						variant="filled"
-						placeholder="Enter Email"
-						type="email"
-						style={{ backgroundColor: '#D6CBB7' }}
-					/>
+                <Box p={5} w="100%">
+                    <Flex>
+                        <Button style={{ backgroundColor: "#c5d86d", color: "#261c15" }}>
+                            Sign up
+                        </Button>
+                        <Spacer />
+						<Link
+                                style={{
+                                    fontFamily: "poppins",
+                                    fontSize: "16px",
+                                    textDecoration: "none",
+									color: "#261c15",
+									fontWeight:'400'
+									
+                                }}
+                            >
+                                Sign in
+                            </Link>
+                      
+                    </Flex>
 
-					<Text
-						mb={2}
-						style={{
-							fontFamily: 'poppins',
-							fontSize: '15px',
-							color: '#826347',
-							fontWeight: '400'
-						}}
-					>
-						Password
-					</Text>
-					<Input
-						variant="filled"
-						placeholder="Enter Password"
-						type="password"
-						mb={5}
-						style={{ backgroundColor: '#D6CBB7' }}
-					/>
+                    <Flex>
+                        <Box style={{ marginTop: "100px" }} ml={4}>
+                            <Text style={{ color: " #261c15", fontFamily: "poppins" }}>
+                                welcome
+                            </Text>
+                            <p
+                                style={{
+                                    color: " #261c15",
+                                    fontSize: "30px",
+                                    fontFamily: "poppins",
+                                    fontWeight: "800",
+                                }}
+                            >
+                            fill the form <br/> 
+							to become <br/> a member
+                            </p>
+                        </Box>
 
-					<Text
-						mb={2}
-						style={{
-							fontFamily: 'poppins',
-							fontSize: '15px',
-							color: '#826347',
-							fontWeight: '400'
-						}}
-					>
-						Confirm Password
-					</Text>
-					<Input
-						variant="filled"
-						placeholder="Enter Password"
-						type="password"
-						mb={5}
-						style={{ backgroundColor: '#D6CBB7' }}
-					/>
+                        <Box
+                            p={5}
+                            ml={5}
+                            style={{
+                                width: "50%",
+                                height: "auto",
+                                marginTop: "90px",
+                            }}
+                        >
+                            <Input mb={5} placeholder="Enter Email" type="email" />
 
-					<Text
-						mb={2}
-						style={{
-							fontFamily: 'poppins',
-							fontSize: '15px',
-							color: '#826347',
-							fontWeight: '400'
-						}}
-					>
-						Username
-					</Text>
-					<Input
-						variant="filled"
-						placeholder="Enter Password"
-						type="text"
-						mb={5}
-						style={{ backgroundColor: '#D6CBB7' }}
-					/>
+                            <Input placeholder="Enter Password" type="password" mb={5} />
 
-					<Button style={{ width: '100%', backgroundColor: '#826347', color: '#CAB49C' }}>
-						Sign Up
-					</Button>
-					<Text mt={2} style={{ fontFamily: 'poppins', fontSize: '14px' }}>
-						Already Have an Account{' '}
-						<Link to="/" style={{ textDecoration: 'underline' }}>
-							Sign in
-						</Link>
-					</Text>
-				</Box>
-			</Flex>
-		</Container>
-	);
+							<Input placeholder="Confirm Password" type="password" mb={5} />
+
+							<Input placeholder="Enter Username" type="text" mb={5} />
+
+
+                            <Button
+                                mb={2}
+                                style={{
+                                    width: "100%",
+                                    backgroundColor: " #c5d86d",
+                                    color: " #261c15",
+                                }}
+                            >
+                                Sign up
+                            </Button>
+                            <Text mt={2} style={{ fontFamily: "poppins", fontSize: "14px" }}>
+                                Already a user{" "}
+                                <Link to="/s" style={{ textDecoration: "underline" }}>
+                                    Sign in
+                                </Link>
+                            </Text>
+                        </Box>
+                    </Flex>
+                </Box>
+            </Flex>
+        </div>
+    );
 }
 
 export default SignUp;

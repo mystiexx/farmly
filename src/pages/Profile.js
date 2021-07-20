@@ -83,7 +83,7 @@ function Profile() {
 							<Flex>
 								<Box
 									p={3}
-									style={{ backgroundColor: '#D6CBB7', borderRadius: '5px' }}
+									style={{ backgroundColor: '#e6ecf0', borderRadius: '5px' }}
 								>
 									<Flex>
 										<FiMail style={{color: '#775937'}}/>
@@ -103,7 +103,7 @@ function Profile() {
 								<Box
 									ml={3}
 									p={3}
-									style={{ backgroundColor: '#D6CBB7', borderRadius: '5px' }}
+									style={{ backgroundColor: '#e6ecf0', borderRadius: '5px' }}
 								>
 									<Flex>
 										<IoLocationOutline style={{ color: '#775937'}}/>
