@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import {
 	MessageBody,
 	MessageBox,
@@ -12,8 +13,10 @@ import { Input, InputLeftElement, InputGroup } from '@chakra-ui/react';
 import { BsSearch } from 'react-icons/bs';
 import { Flex, Box, Center, Spacer } from '@chakra-ui/react';
 import { Grid, GridItem, Text, VStack } from '@chakra-ui/react';
+import { Link } from 'react-router-dom'
 
 function Messages() {
+	const [ active, setActive ] = useState('Feed')
 	return (
 		<MessageBody>
 			<MessageBox>
@@ -24,8 +27,10 @@ function Messages() {
 				</InputGroup>
 
 				<VStack>
+				
 					<Box w="100%">
-						<MessageContainer>
+					<Link to='/user/chat' onClick={()=>setActive('Chat')}>
+						<MessageContainer key='Chat' className={active === 'Chat' ? 'linkActive' : ''}>
 							<Grid
 								h="80px"
 								templateRows="repeat(2, 1fr)"
@@ -86,9 +91,9 @@ function Messages() {
 								</GridItem>
 							</Grid>
 						</MessageContainer>
+						</Link>
 					</Box>
-
-      
+					
 
         
 				</VStack>

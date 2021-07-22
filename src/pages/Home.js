@@ -9,6 +9,7 @@ import Login from './Login';
 import { PageTransition } from '@steveeeie/react-page-transition';
 import SignUp from './SignUp';
 import Profile from './Profile';
+import Chat from './Chat'
 
 function Home() {
 	return (
@@ -22,13 +23,16 @@ function Home() {
 						render={({ location }) => {
 							return (
 								<PageTransition
-									preset="roomToBottom"
+									preset="moveToLeftFromRight"
 									transitionKey={location.pathname}
 								>
+									<Switch location={location}>
 									<Route exact path="/user/feed" component={Feed} />
 									<Route exact path="/user/market" component={Market} />
 									<Route exact path="/user/activity" component={Activity} />
 									<Route exact path="/user/profile" component={Profile} />
+									<Route exact path='/user/chat' component={Chat}/>
+									</Switch>
 								</PageTransition>
 							);
 						}}
