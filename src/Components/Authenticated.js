@@ -8,6 +8,7 @@ import Feed from "./Feed";
 import Market from "../pages/Market";
 import Activity from "../pages/Activity";
 import Profile from "../pages/Profile";
+import Chat from '../pages/Chat'
 
 export default function Authenticated() {
     return (
@@ -24,6 +25,7 @@ export default function Authenticated() {
                         <Route exact path="/user/market" component={Market} />
                         <Route exact path="/user/activity" component={Activity} />
                         <Route exact path="/user/profile" component={Profile} />
+                        <Route exact path="/user/chat" component={Chat} />
                     </PageTransition>
                 );
             }}
