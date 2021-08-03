@@ -4,14 +4,14 @@ import { MdHome, MdPerson } from 'react-icons/md';
 import { AiFillShopping, AiFillHeart } from 'react-icons/ai';
 import { GoSignOut } from 'react-icons/go';
 import { Link } from 'react-router-dom';
-import fire from '../fire'
+import firebase from "../fire";
 import '../App.css'
 
 function Sidebar() {
 	const [ active, setActive ] = useState('Feed')
 
 	const handleLogout = () => {
-        fire.auth().signOut();
+        firebase.auth().signOut();
     };
 	return (
 		<LeftBar>

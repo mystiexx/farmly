@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Flex, Text, Input, Button } from "@chakra-ui/react";
-import fire from "../fire";
+import firebase, {db} from "../fire";
+
 import mage from "../images/image.jpg";
 
 function Login() {
@@ -19,25 +20,28 @@ function Login() {
     const handleLogin = () => {
         setLoading(true);
         clearErrors();
-        fire.auth()
+        firebase.auth()
             .signInWithEmailAndPassword(email, password)
             .catch((err) => {
                 setEmailError(err.message);
                 setPasswordError(err.message);
             });
-        setLoading(false);
     };
 
     const handleSignup = () => {
         setLoading(true);
         clearErrors();
-        fire.auth()
-            .createUserWithEmailAndPassword(email, password)
+        firebase.auth().createUserWithEmailAndPassword(email, password).then((user) => {
+                db.collection("users").doc(user.user.uid)
+                .set({
+                    email: email,
+                    password: password,
+                })
+            })
             .catch((err) => {
                 setEmailError(err.message);
                 setPasswordError(err.message);
             });
-        setLoading(false);
     };
 
     return (
