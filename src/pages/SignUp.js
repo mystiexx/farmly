@@ -1,8 +1,28 @@
-import { Box, Flex, Spacer, Text, Input, Button } from "@chakra-ui/react";
+import React, { useState } from 'react'
+import { Box, Flex, Spacer, Text, Input, Button} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import mage from "../images/image.jpg";
 
 function SignUp() {
+    const [ fullname, setFullName ] = useState('')
+    const [ email, setEmail ] = useState('')
+    const [ password, setPassword ] = useState('')
+    const [ username, setUserName ] = useState('')
+    const [loading, setLoading ] = useState(false)
+
+    const Submit = () =>{
+        setLoading(true)
+       
+        const obj = {
+            fullname,
+            email,
+            password,
+            username
+        }
+        localStorage.setItem('details', obj);
+        window.location.href='/user/feed'
+    }
+
     return (
         <div>
             <Flex>
@@ -69,12 +89,15 @@ function SignUp() {
                                     backgroundColor: " #c5d86d",
                                     color: " #261c15",
                                 }}
+                                onClick={Submit}
+                                disabled={loading}
+                                isLoading={loading}
                             >
                                 Sign up
                             </Button>
                             <Text mt={2} style={{ fontFamily: "poppins", fontSize: "14px" }}>
                                 Already a user{" "}
-                                <Link to="/s" style={{ textDecoration: "underline" }}>
+                                <Link to="/" style={{ textDecoration: "underline" }}>
                                     Sign in
                                 </Link>
                             </Text>

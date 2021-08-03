@@ -30,7 +30,7 @@ export const MessageTime = styled.h3`
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 400;
-	color: #775937;
+	color: #261c15;
 `;
 export const Message = styled.h4`
 	font-family: Poppins;
@@ -40,7 +40,7 @@ export const Message = styled.h4`
 	line-height: 20px;
 	letter-spacing: 0em;
 	text-align: left;
-	color: #CAB49C;
+	color: #261c15;
 `;
 
 export const MessageContainer = styled.div`
