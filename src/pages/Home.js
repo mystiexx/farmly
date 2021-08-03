@@ -1,44 +1,38 @@
-import Feed from '../Components/Feed';
-import Messages from '../Components/Messages';
-import Sidebar from '../Components/Sidebar';
-import { Container } from '../Components/Sidebar.style';
-import { Route, Switch, BrowserRouter as Router, Redirect } from 'react-router-dom';
-import Market from './Market';
-import Activity from './Activity';
-import Login from './Login';
-import { PageTransition } from '@steveeeie/react-page-transition';
-import SignUp from './SignUp';
-import Profile from './Profile';
+import React, { useState, useEffect } from "react";
+import fire from "../fire";
+import {  BrowserRouter as Router, Redirect} from "react-router-dom";
+import Authenticated from '../Components/Authenticated'
+import Unauthenticated from '../Components/Unauthenticated'
+
 
 function Home() {
-	return (
-		<Router>
-			<Switch>
-				<Route exact path="/" component={Login} />
-				<Route exact path="/signup" component={SignUp} />
-				<Container>
-					<Sidebar />
-					<Route
-						render={({ location }) => {
-							return (
-								<PageTransition
-									preset="roomToBottom"
-									transitionKey={location.pathname}
-								>
-									<Route exact path="/user/feed" component={Feed} />
-									<Route exact path="/user/market" component={Market} />
-									<Route exact path="/user/activity" component={Activity} />
-									<Route exact path="/user/profile" component={Profile} />
-								</PageTransition>
-							);
-						}}
-					/>
-					<Messages />
-				</Container>
-				<Redirect to="/" />
-			</Switch>
-		</Router>
-	);
+    const [user, setUser] = useState("");
+
+    const authListener = () => {
+        fire.auth().onAuthStateChanged((user) => {
+            if (!user) {
+                setUser(user);
+            } else {
+                setUser(" ");
+            }
+        });
+    };
+
+    useEffect(() => {
+        authListener();
+    }, []);
+
+    return (
+        <Router>
+                {user ? (
+					<Authenticated/>
+                
+                ) : (
+                  <Unauthenticated/>
+                )}
+				<Redirect to='/'/>
+        </Router>
+    );
 }
 
 export default Home;

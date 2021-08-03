@@ -4,17 +4,22 @@ import { MdHome, MdPerson } from 'react-icons/md';
 import { AiFillShopping, AiFillHeart } from 'react-icons/ai';
 import { GoSignOut } from 'react-icons/go';
 import { Link } from 'react-router-dom';
+import fire from '../fire'
 import '../App.css'
 
 function Sidebar() {
 	const [ active, setActive ] = useState('Feed')
+
+	const handleLogout = () => {
+        fire.auth().signOut();
+    };
 	return (
 		<LeftBar>
 			<div style={{ marginBottom: '30px' }}>
 				<span style={{ fontFamily: 'snap itc regular', fontSize: '20px', color:'#775937'}}>Farmly</span>
 			</div>
 
-			<Link to="/user/feed" onClick={()=>setActive('Feed')}>
+			<Link to="/" onClick={()=>setActive('Feed')}>
 				<SideBarOption key='Feed' className={active === 'Feed' ? 'linkActive' : ''}>
 					<div style={{ padding: '20px' }}>
 						<MdHome style={{ fontSize: '30px' }} />
@@ -49,14 +54,13 @@ function Sidebar() {
 			</SideBarOption>
 			</Link>
 
-<Link to='/'>
-			<SideBarOption>
+			<SideBarOption onClick={handleLogout}>
 				<div style={{ padding: '20px' }}>
 					<GoSignOut style={{ fontSize: '30px' }} />
 				</div>
 				<LinkText>Sign out</LinkText>
 			</SideBarOption>
-			</Link>
+			
 		</LeftBar>
 	);
 }

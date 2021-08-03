@@ -56,13 +56,10 @@ function SignUp() {
                                 marginTop: "90px",
                             }}
                         >
-                            <Input mb={5} placeholder="Enter Email" type="email" />
+                            <Input mb={5} placeholder="Enter Email" type="email" required/>
 
-                            <Input placeholder="Enter Password" type="password" mb={5} />
+                            <Input placeholder="Enter Password" type="password" mb={5}  required/>
 
-							<Input placeholder="Confirm Password" type="password" mb={5} />
-
-							<Input placeholder="Enter Username" type="text" mb={5} />
 
 
                             <Button
