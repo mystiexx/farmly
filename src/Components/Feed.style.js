@@ -57,7 +57,7 @@ margin-left: 20px;
 font-size: 20px;
 border: none;
 outline: none;
-color: #775937;
+color: #261c15;
 `
 export const TweetBoxButton = styled.button ` 
 border: none;

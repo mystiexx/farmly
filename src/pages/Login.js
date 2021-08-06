@@ -1,16 +1,33 @@
+/* eslint-disable default-case */
 import React, { useState } from "react";
-import { Box, Flex, Text, Input, Button } from "@chakra-ui/react";
-import firebase, {db} from "../fire";
-
+import {
+    Box,
+    Flex,
+    Text,
+    Input,
+    Button,
+    useToast,
+    InputGroup,
+    InputRightElement,
+    Icon,
+} from "@chakra-ui/react";
+import firebase, { db } from "../fire";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import mage from "../images/image.jpg";
 
 function Login() {
+    const toast = useToast();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
+    const [show, setShow] = useState(false);
+    const [username, setUsername] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [hasAccount, setHasAccount] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const handleClick = () => setShow(!show);
 
     const clearErrors = () => {
         setEmailError(" ");
@@ -20,27 +37,64 @@ function Login() {
     const handleLogin = () => {
         setLoading(true);
         clearErrors();
-        firebase.auth()
+        firebase
+            .auth()
             .signInWithEmailAndPassword(email, password)
             .catch((err) => {
-                setEmailError(err.message);
-                setPasswordError(err.message);
+                // eslint-disable-next-line default-case
+                switch (err.code) {
+                    case "auth/invalid-email":
+                    case "auth/user-disabled":
+                    case "auth/user-not-found":
+                        setEmailError(err.message);
+                        break;
+                    case "auth/wrong-password":
+                        setPasswordError(err.message);
+                        break;
+                }
             });
     };
 
     const handleSignup = () => {
         setLoading(true);
         clearErrors();
-        firebase.auth().createUserWithEmailAndPassword(email, password).then((user) => {
-                db.collection("users").doc(user.user.uid)
-                .set({
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then((user) => {
+                const uid = user.user.uid;
+                db.collection("users").doc(user.user.uid).set({
+                    uid,
                     email: email,
                     password: password,
-                })
+                    username: username,
+                    name: name,
+                    createdAt: new Date().toISOString(),
+                });
+                if (user) {
+                    localStorage.setItem("id", user.uid);
+                    toast({
+                        title: "Welcome.",
+                        description: "Farmly",
+                        status: "success",
+                        duration: 9000,
+                        isClosable: true,
+                        position: "top-right",
+                    });
+                }
             })
+
             .catch((err) => {
-                setEmailError(err.message);
-                setPasswordError(err.message);
+                switch (err.code) {
+                    case "auth/email-already-in-use":
+                    case "auth/invalid-email":
+                        setEmailError(err.message);
+                        break;
+                    case "auth/weak-password":
+                        setPasswordError(err.message);
+                        break;
+                }
+                setLoading(false);
             });
     };
 
@@ -97,6 +151,18 @@ function Login() {
                                 marginTop: "100px",
                             }}
                         >
+                            {hasAccount ? (
+                                <> </>
+                            ) : (
+                                <Input
+                                    placeholder="Enter Name"
+                                    type="text"
+                                    mb={5}
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    required
+                                />
+                            )}
                             <Input
                                 mb={5}
                                 placeholder="Enter Email"
@@ -112,15 +178,31 @@ function Login() {
                             >
                                 {emailError}
                             </Text>
-
-                            <Input
-                                placeholder="Enter Password"
-                                type="password"
-                                mb={5}
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
+                            <InputGroup>
+                                <Input
+                                    placeholder="Enter Password"
+                                    type={show ? "text" : "password"}
+                                    mb={5}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                                <InputRightElement>
+                                    <Button variant="link" size="sm" onClick={handleClick}>
+                                        {show ? (
+                                            <Icon
+                                                as={AiFillEyeInvisible}
+                                                style={{ fontSize: "20px", color: "#9A9A9A" }}
+                                            />
+                                        ) : (
+                                            <Icon
+                                                as={AiFillEye}
+                                                style={{ fontSize: "20px", color: "#9A9A9A" }}
+                                            />
+                                        )}
+                                    </Button>
+                                </InputRightElement>
+                            </InputGroup>
                             <Text
                                 mt={-5}
                                 mb={5}
@@ -128,6 +210,19 @@ function Login() {
                             >
                                 {passwordError}
                             </Text>
+
+                            {hasAccount ? (
+                                <> </>
+                            ) : (
+                                <Input
+                                    placeholder="Enter Username"
+                                    type="text"
+                                    mb={5}
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    required
+                                />
+                            )}
 
                             {hasAccount ? (
                                 <>
@@ -149,9 +244,12 @@ function Login() {
                                         style={{ fontFamily: "poppins", fontSize: "14px" }}
                                     >
                                         Not a user yet ?{" "}
-                                        <Text onClick={() => setHasAccount(!hasAccount)}>
+                                        <Button
+                                            variant="link"
+                                            onClick={() => setHasAccount(!hasAccount)}
+                                        >
                                             Sign up
-                                        </Text>
+                                        </Button>
                                     </Text>
                                 </>
                             ) : (
@@ -174,9 +272,12 @@ function Login() {
                                         style={{ fontFamily: "poppins", fontSize: "14px" }}
                                     >
                                         Have an account ?{" "}
-                                        <Text onClick={() => setHasAccount(!hasAccount)}>
+                                        <Button
+                                            variant="link"
+                                            onClick={() => setHasAccount(!hasAccount)}
+                                        >
                                             Sign in
-                                        </Text>
+                                        </Button>
                                     </Text>
                                 </>
                             )}

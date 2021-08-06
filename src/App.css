@@ -6,3 +6,7 @@
 .linkActive {
   color: #c5d86d;
 }
+
+.hover:hover{
+  cursor: pointer;
+}

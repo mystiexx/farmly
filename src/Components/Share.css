@@ -1,0 +1,11 @@
+input [ type='file'] {
+    display: none;
+}
+ 
+#file {
+    display: none;
+}
+
+label:hover{
+    cursor: pointer;
+}

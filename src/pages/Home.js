@@ -14,6 +14,7 @@ function Home() {
                 setUser(user);
             } else {
                 setUser(" ");
+                localStorage.setItem('id', user.uid)
             }
         });
     };
