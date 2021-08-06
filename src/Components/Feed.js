@@ -13,7 +13,6 @@ function Feed() {
 			<Share text={'Share your thoughts'} />
 
 			<FeedPost />
-			<FeedPost />
 
 		</FeedBox>
 	);

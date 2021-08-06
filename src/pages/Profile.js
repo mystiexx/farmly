@@ -20,7 +20,6 @@ import {
 } from "@chakra-ui/react";
 import firebase, { db } from "../fire";
 import moment from "moment";
-import { BiImageAdd } from "react-icons/bi";
 
 
 function Profile() {
@@ -30,15 +29,8 @@ function Profile() {
     const [bio, setBio] = useState("");
     const [location, setLocation] = useState("");
     const [loading, setLoading] = useState(false);
-    const [fileUrl, setFileUrl] = useState(null);
 
-    const handleUpload = async (e) => {
-        const file = e.target.files[0];
-        const storageRef = firebase.storage().ref();
-        const fileRef = storageRef.child(file.name);
-        await fileRef.put(file);
-        setFileUrl(await fileRef.getDownloadURL());
-    };
+  
 
     const updateBio = () => {
         setLoading(true);
@@ -48,7 +40,6 @@ function Profile() {
             .update({
                 bio: bio,
                 location: location,
-                profileImage: fileUrl,
             })
             .then(() => {
                 toast({
@@ -117,10 +108,7 @@ function Profile() {
                             onChange={(e) => setLocation(e.target.value)}
                         />
 
-                        <input type="file" onChange={handleUpload} id="file" />
-                        <label for="file">
-                            <BiImageAdd style={{ fontSize: "25px", marginTop: "5px" }} />
-                        </label>
+                    
                     </ModalBody>
 
                     <ModalFooter>

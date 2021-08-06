@@ -5,24 +5,22 @@ import {
     TweetBoxInputI,
     TweetBoxImage,
 } from "../Components/Feed.style";
-import { BiImageAdd } from "react-icons/bi";
 import React, { useState, useEffect } from "react";
 import firebase, { db } from "../fire";
 import { Button, useToast, Flex, Spacer } from "@chakra-ui/react";
-import './Share.css'
 
 function Share(props) {
     const toast = useToast("");
     const [feed, setFeed] = useState("");
     const [loading, setLoading] = useState(false);
-    const [fileUrl, setFileUrl] = useState(null);
+    const [image, setImage] = useState(null);
 
     const handleUpload = async (e) => {
         const file = e.target.files[0];
         const storageRef = firebase.storage().ref();
         const fileRef = storageRef.child(file.name);
         await fileRef.put(file);
-        setFileUrl(await fileRef.getDownloadURL());
+        setImage(await fileRef.getDownloadURL());
     };
 
     const clearInputs = () => {
@@ -37,7 +35,7 @@ function Share(props) {
             .add({
                 body: feed,
                 id: user.uid,
-                imageUrl: fileUrl,
+                imageUrl: image,
                 likeCount: 0,
                 createdAt: new Date().toISOString(),
             })
@@ -49,6 +47,7 @@ function Share(props) {
                     duration: 9000,
                     isClosable: true,
                 });
+                window.location.href='/'
                 setLoading(false);
                 clearInputs();
             })
@@ -82,11 +81,6 @@ function Share(props) {
                 <Flex>
                     <Spacer />
                     <input type="file" onChange={handleUpload} id='file'/>
-                        <label for="file">
-                            <BiImageAdd style={{fontSize: '25px', marginTop:'5px'}} />
-                        </label>
-                    
-
                     <Button
 					ml={3}
                         style={{
