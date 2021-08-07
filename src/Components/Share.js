@@ -67,6 +67,7 @@ function Share(props) {
                 name: name,
                 username: username,
                 likeCount: 0,
+                comment:[],
                 createdAt: new Date().toISOString(),
             })
             .then(() => {
@@ -77,7 +78,7 @@ function Share(props) {
                     duration: 9000,
                     isClosable: true,
                 });
-            
+            window.location.href='/user/feed'
                 setLoading(false);
                 clearInputs();
             })

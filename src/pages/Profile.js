@@ -65,6 +65,7 @@ function Profile() {
 
     const fetchUser = async () => {
         const user = firebase.auth().currentUser;
+        console.log(user)
         db.collection("users")
             .where("uid", "==", user.uid)
             .get()

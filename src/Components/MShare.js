@@ -1,7 +1,7 @@
 import { TweetBox, TweetBoxForm, TweetBoxInput, TweetBoxInputI, TweetBoxImage } from "./Feed.style";
 import React, { useState, useEffect } from "react";
-import firebase, { db, storage } from "../fire";
-import { Button, useToast, Flex, Spacer, IconButton } from "@chakra-ui/react";
+import firebase, { db } from "../fire";
+import { Button, useToast, Flex, Spacer, IconButton, Text } from "@chakra-ui/react";
 import {BiImageAdd} from 'react-icons/bi'
 import Files from "react-files";
 
@@ -10,12 +10,14 @@ function MShare(props) {
     const [feed, setFeed] = useState("");
     const [loading, setLoading] = useState(false);
     const [image, setImage] = useState(null);
-    const [ file, setFile ] = useState(null)
 
-    const FileChange = files => {
-        if( files[0] ) {
-            setImage(files[0])
-        }
+    const FileChange = async (files) => {
+        const file = files[0]
+       const storageRef = firebase.storage().ref()
+       const fileRef = storageRef.child(file.name)
+       await fileRef.put(file)
+       const fileUrl = await fileRef.getDownloadURL()
+       setImage(fileUrl)
     }
 
     const FileError = (error, file) => {
@@ -35,29 +37,12 @@ function MShare(props) {
     const handlePost = (e) => {
         e.preventDefault();
         setLoading(true);
-        const uploadTask = storage.ref(`store/${image.name}`).put(image)
-        uploadTask.on(
-            'state_changed',
-            snapshot => {},
-            error => {
-                console.log(error)
-            },
-            () =>{ 
-                storage.ref('store')
-                .child(image.name)
-                .getDownloadURL()
-                .then(url=>{
-                    console.log(url)
-                    setFile(url)
-                })
-            }
-        )
         const user = firebase.auth().currentUser;
         db.collection("market")
             .add({
                 body: feed,
                 id: user.uid,
-                imageUrl: file,
+                imageUrl: image,
                 createdAt: new Date().toISOString(),
             })
             .then(() => {
@@ -99,6 +84,10 @@ function MShare(props) {
                 </TweetBoxInput>
                 <Flex>
                     <Spacer />
+                    <Text mr={4} mt={3} style={{
+                        fontSize:'10px',
+                        fontFamily:'poppins'
+                    }}>Please choose an image first</Text>
                     <Files
                     onChange={FileChange}
                         onError={FileError}

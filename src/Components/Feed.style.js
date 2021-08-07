@@ -116,7 +116,7 @@ export const PostHeaderText = styled.h3 `
 
 export const PostHeaderDescription = styled.div ` 
 margin-bottom: 10px;
-font-size: 15px;
+font-size: 16px;
 font-family: poppins;
 color:  #261c15;
 `
