@@ -80,7 +80,7 @@ background-color:  #c5d86d;
 export const Post = styled.div `
 display: flex;
 align-items: flex-start;
-border-bottom: 1px solid #D6CBB7;
+border-bottom: 1px solid #e6ecf0;
 padding-bottom: 10px;
 `
 

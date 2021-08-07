@@ -1,17 +1,11 @@
-import {
-    TweetBox,
-    TweetBoxForm,
-    TweetBoxInput,
-    TweetBoxInputI,
-    TweetBoxImage,
-} from "../Components/Feed.style";
+import { TweetBox, TweetBoxForm, TweetBoxInput, TweetBoxInputI, TweetBoxImage } from "./Feed.style";
 import React, { useState, useEffect } from "react";
 import firebase, { db, storage } from "../fire";
 import { Button, useToast, Flex, Spacer, IconButton } from "@chakra-ui/react";
 import {BiImageAdd} from 'react-icons/bi'
 import Files from "react-files";
 
-function Share(props) {
+function MShare(props) {
     const toast = useToast("");
     const [feed, setFeed] = useState("");
     const [loading, setLoading] = useState(false);
@@ -41,7 +35,7 @@ function Share(props) {
     const handlePost = (e) => {
         e.preventDefault();
         setLoading(true);
-        const uploadTask = storage.ref(`feed/${image.name}`).put(image)
+        const uploadTask = storage.ref(`store/${image.name}`).put(image)
         uploadTask.on(
             'state_changed',
             snapshot => {},
@@ -59,12 +53,11 @@ function Share(props) {
             }
         )
         const user = firebase.auth().currentUser;
-        db.collection("posts")
+        db.collection("market")
             .add({
                 body: feed,
                 id: user.uid,
                 imageUrl: file,
-                likeCount: 0,
                 createdAt: new Date().toISOString(),
             })
             .then(() => {
@@ -75,7 +68,6 @@ function Share(props) {
                     duration: 9000,
                     isClosable: true,
                 });
-                window.location.href='/'
                 setLoading(false);
                 clearInputs();
             })
@@ -87,7 +79,6 @@ function Share(props) {
                     duration: 9000,
                     isClosable: true,
                 });
-                console.error("error", error);
             });
     };
 
@@ -122,8 +113,9 @@ function Share(props) {
                         <IconButton aria-label="Search database" icon={<BiImageAdd/>} />
                         
                     </Files>
+                 
                     <Button
-					ml={3}
+                        ml={3}
                         style={{
                             fontFamily: "poppins",
                             backgroundColor: "#c5d86d",
@@ -141,4 +133,4 @@ function Share(props) {
     );
 }
 
-export default Share;
+export default MShare;

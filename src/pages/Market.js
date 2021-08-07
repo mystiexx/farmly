@@ -1,13 +1,13 @@
 import { FeedBox } from "../Components/Feed.style";
 import Header from "../Components/Header";
-import Share from "../Components/Share";
+import MShare from "../Components/MShare";
 import { Box, Flex, Avatar, Text, Image, Button } from "@chakra-ui/react";
 
 function Market() {
     return (
         <FeedBox>
             <Header />
-            <Share text={"What are you selling?"} />
+            <MShare text={"What are you selling?"} />
             <Box w="100%" p={4} mb={5}>
                 <Flex>
                     <Avatar src="https://billiardport.com/assets/pages/media/profile/profile_user.jpg"></Avatar>
