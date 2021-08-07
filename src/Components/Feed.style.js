@@ -103,14 +103,15 @@ font-weight: 600;
 font-size: 12px;
 font-family: poppins;
 color: gray;
+margin-left: 5px;
 `
 
 export const PostHeaderText = styled.h3 ` 
- font-size: 15px;
+ font-size: 18px;
  margin-bottom: 5px;
  font-family: poppins;
  color:  #261c15;
- font-weight: 500;
+ font-weight: 800;
 `
 
 export const PostHeaderDescription = styled.div ` 

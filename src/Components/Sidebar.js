@@ -19,7 +19,7 @@ function Sidebar() {
 				<span style={{ fontFamily: 'snap itc regular', fontSize: '20px', color:'#775937'}}>Farmly</span>
 			</div>
 
-			<Link to="/" onClick={()=>setActive('Feed')}>
+			<Link to="/user/feed" onClick={()=>setActive('Feed')}>
 				<SideBarOption key='Feed' className={active === 'Feed' ? 'linkActive' : ''}>
 					<div style={{ padding: '20px' }}>
 						<MdHome style={{ fontSize: '30px' }} />

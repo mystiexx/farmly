@@ -6,23 +6,40 @@ import {
     TweetBoxImage,
 } from "../Components/Feed.style";
 import React, { useState, useEffect } from "react";
-import firebase, { db, storage } from "../fire";
-import { Button, useToast, Flex, Spacer, IconButton } from "@chakra-ui/react";
+import firebase, { db } from "../fire";
+import { Button, useToast, Flex, Spacer, IconButton, Text } from "@chakra-ui/react";
 import {BiImageAdd} from 'react-icons/bi'
 import Files from "react-files";
 
 function Share(props) {
     const toast = useToast("");
     const [feed, setFeed] = useState("");
+    const [name, setName] = useState("");
+    const [username, setUserName] = useState("");
     const [loading, setLoading] = useState(false);
     const [image, setImage] = useState(null);
-    const [ file, setFile ] = useState(null)
 
-    const FileChange = files => {
-        if( files[0] ) {
-            setImage(files[0])
-        }
+    const FileChange = async (files) => {
+       const file = files[0]
+       const storageRef = firebase.storage().ref()
+       const fileRef = storageRef.child(file.name)
+       await fileRef.put(file)
+       const fileUrl = await fileRef.getDownloadURL()
+       setImage(fileUrl)
     }
+
+    const fetchUser = async () => {
+        const user = firebase.auth().currentUser;
+        db.collection("users")
+            .where("uid", "==", user.uid)
+            .get()
+            .then((data) => {
+                data.forEach((doc) => {
+                    setName(doc.data().name)
+                    setUserName(doc.data().username)
+                });
+            });
+    };
 
     const FileError = (error, file) => {
         toast({
@@ -38,32 +55,17 @@ function Share(props) {
         setFeed(" ");
     };
 
-    const handlePost = (e) => {
+    const handlePost =  (e) => {
         e.preventDefault();
         setLoading(true);
-        const uploadTask = storage.ref(`feed/${image.name}`).put(image)
-        uploadTask.on(
-            'state_changed',
-            snapshot => {},
-            error => {
-                console.log(error)
-            },
-            () =>{ 
-                storage.ref('store')
-                .child(image.name)
-                .getDownloadURL()
-                .then(url=>{
-                    console.log(url)
-                    setFile(url)
-                })
-            }
-        )
         const user = firebase.auth().currentUser;
         db.collection("posts")
             .add({
                 body: feed,
                 id: user.uid,
-                imageUrl: file,
+                imageUrl: image,
+                name: name,
+                username: username,
                 likeCount: 0,
                 createdAt: new Date().toISOString(),
             })
@@ -75,7 +77,7 @@ function Share(props) {
                     duration: 9000,
                     isClosable: true,
                 });
-                window.location.href='/'
+            
                 setLoading(false);
                 clearInputs();
             })
@@ -93,6 +95,7 @@ function Share(props) {
 
     useEffect(() => {
         clearInputs();
+        fetchUser()
     }, []);
     return (
         <TweetBox>
@@ -108,6 +111,10 @@ function Share(props) {
                 </TweetBoxInput>
                 <Flex>
                     <Spacer />
+                    <Text mr={4} mt={3} style={{
+                        fontSize:'10px',
+                        fontFamily:'poppins'
+                    }}>Please choose an image first</Text>
                     <Files
                     onChange={FileChange}
                         onError={FileError}

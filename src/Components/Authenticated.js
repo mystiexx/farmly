@@ -21,7 +21,7 @@ export default function Authenticated() {
                         preset="roomToBottom"
                         transitionKey={location.pathname}
                     >
-                        <Route exact path="/" component={Feed} />
+                        <Route exact path="/user/feed" component={Feed} />
                         <Route exact path="/user/market" component={Market} />
                         <Route exact path="/user/activity" component={Activity} />
                         <Route exact path="/user/profile" component={Profile} />
@@ -31,7 +31,7 @@ export default function Authenticated() {
             }}
         />
         <Messages />
-        <Redirect to='/'/>
+        <Redirect to='/user/feed'/>
     </Container>
     )
 }
