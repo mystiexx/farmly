@@ -71,6 +71,8 @@ function Profile() {
             .get()
             .then((data) => {
                 data.forEach((doc) => {
+                    setBio(doc.data().bio)
+                    setLocation(doc.data().location)
                     let post = [];
                     post.push({
                         email: doc.data().email,
@@ -87,7 +89,7 @@ function Profile() {
 
     useEffect(() => {
         fetchUser();
-    });
+    },[]);
     return (
         <FeedBox>
             <Modal isOpen={isOpen} onClose={onClose}>
@@ -99,6 +101,7 @@ function Profile() {
                         <Text>Bio</Text>
                         <Textarea
                             placeholder="enter bio"
+                            value={bio}
                             onChange={(e) => setBio(e.target.value)}
                         />
 
@@ -106,6 +109,7 @@ function Profile() {
                         <Input
                             type="text"
                             placeholder="Yenagoa, Bayelsa State"
+                            value={location}
                             onChange={(e) => setLocation(e.target.value)}
                         />
 

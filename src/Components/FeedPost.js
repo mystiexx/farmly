@@ -19,24 +19,22 @@ import moment from "moment";
 function FeedPost() {
     const [feed, setFeed] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [like, setLike] = useState(0);
+    const [like, setLike] = useState(1);
 
-    const handleLike = (data) => {
+    const handleLike = async (data) => {
         setLike(like + 1);
-        db.collection("posts")
-            .doc(data)
-            .update({
-                likeCount: like,
+        if (data) {
+           await db.collection('likes').add({
+                postId: data
             })
-            .then(() => {
-                db.collection("posts")
-                    .doc(data)
-                    .onSnapshot((doc) => {
-                        console.log("Current data: ", doc.data());
-                        return { ...doc.data(), uid: doc.id };
-                    });
-                setLoading(false);
-            });
+            .then(()=> {
+              db.collection("posts")
+                .doc(data)
+                .update({
+                    likeCount: like,
+                })
+            })
+        }
     };
 
     const getPost = () => {
@@ -46,11 +44,12 @@ function FeedPost() {
             .then((querySnapshot) => {
                 // eslint-disable-next-line array-callback-return
                 const documents = querySnapshot.docs.map((doc) => {
-                    return { ...doc.data(), uid: doc.id };
+                    if (doc.exists) {
+                        return { ...doc.data(), uid: doc.id };
+                    }
                 });
                 setFeed(documents);
                 setLoading(false);
-                console.log(documents);
             });
     };
 
@@ -120,7 +119,7 @@ function FeedPost() {
                                             {data.likeCount <= 0 ? (
                                                 <> </>
                                             ) : (
-                                                <Text>{data.likeCount} likes</Text>
+                                                <Text>{data.likeCount} like</Text>
                                             )}
                                         </Box>
 
