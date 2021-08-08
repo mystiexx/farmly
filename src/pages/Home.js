@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../fire";
-import {  BrowserRouter as Router, Redirect} from "react-router-dom";
-import Authenticated from '../Components/Authenticated'
-import Unauthenticated from '../Components/Unauthenticated'
-
+import { BrowserRouter as Router, Redirect } from "react-router-dom";
+import Authenticated from "../Components/Authenticated";
+import Unauthenticated from "../Components/Unauthenticated";
 
 function Home() {
     const [user, setUser] = useState("");
@@ -14,7 +13,7 @@ function Home() {
                 setUser(user);
             } else {
                 setUser(" ");
-                localStorage.setItem('id', user.uid)
+                localStorage.setItem("id", user.uid);
             }
         });
     };
@@ -25,13 +24,8 @@ function Home() {
 
     return (
         <Router>
-                {user ? (
-					<Authenticated/>
-                
-                ) : (
-                  <Unauthenticated/>
-                )}
-				<Redirect to='/'/>
+            {user ? <Authenticated /> : <Unauthenticated />}
+            <Redirect to="/" />
         </Router>
     );
 }

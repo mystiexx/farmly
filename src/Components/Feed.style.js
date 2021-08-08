@@ -32,7 +32,7 @@ text-transform: uppercase;
 
 export const TweetBoxImage = styled.img `
 border-radius: 50%;
-height: 40px;
+height: 60px;
 `
 
 export const TweetBox = styled.div `

@@ -10,7 +10,7 @@ import {
 } from "./Feed.style";
 import { Box, Center, Text } from "@chakra-ui/react";
 import { AiOutlineLike } from "react-icons/ai";
-import { db } from "../fire";
+import firebase, { db } from "../fire";
 import React, { useState, useEffect } from "react";
 import { Spinner, Grid } from "@chakra-ui/react";
 import { VscComment } from "react-icons/vsc";
@@ -20,6 +20,7 @@ function FeedPost() {
     const [feed, setFeed] = useState([]);
     const [loading, setLoading] = useState(true);
     const [like, setLike] = useState(1);
+    const [profileimage, setProfileImage] = useState(null);
 
     const handleLike = async (data) => {
         setLike(like + 1);
@@ -38,6 +39,10 @@ function FeedPost() {
     };
 
     const getPost = () => {
+        const user = firebase.auth().currentUser;
+        if ( user !== null) {
+            setProfileImage(user.photoURL)
+        }
         db.collection("posts")
             .orderBy("createdAt", "desc")
             .get()
@@ -86,7 +91,7 @@ function FeedPost() {
                                 <Post key={id}>
                                     <PostAvatar>
                                         <PostAvatarImage
-                                            src="https://billiardport.com/assets/pages/media/profile/profile_user.jpg"
+                                            src={profileimage}
                                             alt="feed"
                                             height="40px"
                                         />

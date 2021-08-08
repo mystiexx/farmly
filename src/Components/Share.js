@@ -18,6 +18,7 @@ function Share(props) {
     const [username, setUserName] = useState("");
     const [loading, setLoading] = useState(false);
     const [image, setImage] = useState(null);
+    const [profileimage, setProfileImage] = useState(null);
 
     const FileChange = async (files) => {
        const file = files[0]
@@ -30,6 +31,9 @@ function Share(props) {
 
     const fetchUser = async () => {
         const user = firebase.auth().currentUser;
+        if ( user !== null) {
+            setProfileImage(user.photoURL)
+        }
         db.collection("users")
             .where("uid", "==", user.uid)
             .get()
@@ -66,7 +70,7 @@ function Share(props) {
                 imageUrl: image,
                 name: name,
                 username: username,
-                likeCount: 0,
+                likeCount: null,
                 comment:[],
                 createdAt: new Date().toISOString(),
             })
@@ -102,7 +106,7 @@ function Share(props) {
         <TweetBox>
             <TweetBoxForm>
                 <TweetBoxInput>
-                    <TweetBoxImage src="https://billiardport.com/assets/pages/media/profile/profile_user.jpg" />
+                    <TweetBoxImage src={profileimage} />
                     <TweetBoxInputI
                         row="4"
                         cols="50"
